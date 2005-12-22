@@ -1,0 +1,57 @@
+Description:
+    The trestle generator (an adaptation of the Rails scaffold generator)
+    creates a controller to interact with a model. If the model does not exist,
+    it creates the model as well. The generated code is equivalent to the
+    "scaffold :model" declaration, making it easy to migrate when you wish to
+    customize your controller and views.
+    
+    The generator takes a model name, an optional controller name, and a
+    list of views as arguments. Trestled actions and views are created
+    automatically. Any views left over generate empty stubs.
+    
+    The trestled actions are:
+        index, add_new, edit, destroy
+    
+    The trestled views are:
+        _index_without_id, _index_with_id, add_new, edit
+    
+    If a controller name is not given, the plural form of the model name
+    will be used. The model and controller names may be given in CamelCase
+    or under_score and should not be suffixed with 'Model' or 'Controller'.
+    Both model and controller names may be prefixed with a module like a
+    file path; see the Modules Example for usage.
+    
+    Why use the trestle generator instead of the scaffold generator? The trestle
+    generator produces code that is closer to production-quality in two
+    respects:
+    
+    * Safety: the trestle generator uses the HTTP POST method for actions that
+      change data
+      
+      Well-behaved web applications protect themselves against errant GET
+      requests (such as come from Google Web Accelerator and the like). The
+      scaffold generator fails to do this.
+      
+    * Simplicity: the trestle generator produces controllers with just four
+      actions (index, add_new, edit, and destroy)
+      
+      Controllers produced by the scaffold generator have eight actions. Fewer
+      actions exposed to the outside world is better if the behavior of these
+      actions is in line with the semantics of GET and POST.
+    
+    The net effect is that you will not have to throw away or tweak as much
+    trestle-generated code as you do scaffold-generated code. Less work for you
+    means your application gets built sooner and better.
+
+Example:
+    ./script/generate trestle Account Bank debit credit
+    
+    This will generate an Account model and BankController with a full test
+    suite and a basic user interface. Now create the accounts table in your
+    database and browse to http://localhost/bank/ -- voila, you're on Rails!
+
+Modules Example:
+    ./script/generate trestle CreditCard 'admin/credit_card' suspend late_fee
+    
+    This will generate a CreditCard model and CreditCardController controller
+    in the admin module.
