@@ -3,10 +3,6 @@ class <%= controller_class_name %>Controller < ApplicationController
          :params => :id,
          :add_flash => { :notice => 'Missing <%= model_name %> ID.' },
          :redirect_to => { :action => 'index<%= suffix %>' }
-  verify :only => :destroy,
-         :method => :post,
-         :add_flash => { :notice => '<%= model_name %> can be destroyed only by using HTTP POST.' },
-         :redirect_to => { :action => 'index<%= suffix %>' }
   
 <% for action in untrestled_actions -%>
   def <%= action %><%= suffix %>
@@ -26,9 +22,14 @@ class <%= controller_class_name %>Controller < ApplicationController
   end
   
   def destroy<%= suffix %>
-    <%= model_name %>.find(params[:id]).destroy
-    flash[:notice] = '<%= model_name %> was successfully destroyed.'
-    redirect_to :action => 'index<%= suffix %>'
+    if request.post?
+      <%= model_name %>.find(params[:id]).destroy
+      flash[:notice] = '<%= model_name %> was successfully destroyed.'
+      redirect_to :action => 'index<%= suffix %>'
+    else
+      flash[:notice] = 'Click Destroy to destroy the <%= model_name %>.'
+      redirect_to :action => 'edit<%= suffix %>', :id => params[:id]
+    end
   end
   
   def edit<%= suffix %>
