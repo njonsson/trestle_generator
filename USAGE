@@ -20,28 +20,6 @@ Description:
     or under_score and should not be suffixed with 'Model' or 'Controller'.
     Both model and controller names may be prefixed with a module like a
     file path; see the Modules Example for usage.
-    
-    Why use the trestle generator instead of the scaffold generator? The trestle
-    generator produces code that is closer to production-quality in two
-    respects:
-    
-    * Safety: the trestle generator uses the HTTP POST method for actions that
-      change data
-      
-      Well-behaved web applications protect themselves against errant GET
-      requests (such as come from Google Web Accelerator and the like). The
-      scaffold generator fails to do this.
-      
-    * Simplicity: the trestle generator produces controllers with just four
-      actions (index, add_new, edit, and destroy)
-      
-      Controllers produced by the scaffold generator have eight actions. Fewer
-      actions exposed to the outside world is better if the behavior of these
-      actions is in line with the semantics of GET and POST.
-    
-    The net effect is that you will not have to throw away or tweak as much
-    trestle-generated code as you do scaffold-generated code. Less work for you
-    means your application gets built sooner and better.
 
 Example:
     ./script/generate trestle Account Bank debit credit
