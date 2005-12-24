@@ -1,7 +1,7 @@
 class <%= controller_class_name %>Controller < ApplicationController
   verify :only => [ :edit, :destroy ],
          :params => :id,
-         :add_flash => { :notice => 'Missing <%= model_name %> ID.' },
+         :add_flash => { :notice => 'Missing <%= singular_name %> ID.' },
          :redirect_to => { :action => 'index<%= suffix %>' }
   
 <% for action in untrestled_actions -%>
@@ -13,7 +13,7 @@ class <%= controller_class_name %>Controller < ApplicationController
     if request.post?
       @<%= singular_name %> = <%= model_name %>.new(params[:<%= singular_name %>])
       if @<%= singular_name %>.save
-        flash[:notice] = 'A new <%= model_name %> was successfully added.'
+        flash[:notice] = 'A new <%= singular_name %> was successfully added.'
         redirect_to :action => 'index<%= suffix %>'
       end
     else
@@ -24,7 +24,7 @@ class <%= controller_class_name %>Controller < ApplicationController
   def destroy<%= suffix %>
     if request.post?
       <%= model_name %>.find(params[:id]).destroy
-      flash[:notice] = '<%= model_name %> was successfully destroyed.'
+      flash[:notice] = 'The <%= singular_name %> was successfully destroyed.'
       redirect_to :action => 'index<%= suffix %>'
     else
       flash[:notice] = 'Click Destroy to destroy the <%= model_name %>.'
@@ -36,7 +36,7 @@ class <%= controller_class_name %>Controller < ApplicationController
     if request.post?
       @<%= singular_name %> = <%= model_name %>.find(params[:id])
       if @<%= singular_name %>.update_attributes(params[:<%= singular_name %>])
-        flash[:notice] = '<%= model_name %> was successfully edited.'
+        flash[:notice] = 'The <%= singular_name %> was successfully edited.'
         redirect_to :action => 'index<%= suffix %>', :id => @<%= singular_name %>
       end
     else
