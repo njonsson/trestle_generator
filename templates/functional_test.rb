@@ -29,7 +29,7 @@ class <%= controller_class_name %>ControllerTest < Test::Unit::TestCase
   end
   
 <% end -%>
-  def test_add_new<%= suffix %>_get
+  def test_add_new<%= suffix %>_using_get
     get :add_new<%= suffix %>
     
     assert_response :success
@@ -38,7 +38,7 @@ class <%= controller_class_name %>ControllerTest < Test::Unit::TestCase
     assert_not_nil assigns(:<%= singular_name %>)
   end
   
-  def test_add_new<%= suffix %>_post
+  def test_add_new<%= suffix %>_using_post
     num_<%= plural_name %> = <%= model_name %>.count
     
     post :add_new<%= suffix %>, :<%= singular_name %> => {}
@@ -49,7 +49,7 @@ class <%= controller_class_name %>ControllerTest < Test::Unit::TestCase
     assert_equal num_<%= plural_name %> + 1, <%= model_name %>.count
   end
   
-  def test_destroy<%= suffix %>_get
+  def test_destroy<%= suffix %>_using_get
     assert_not_nil <%= model_name %>.find(1)
     
     get :destroy, :id => 1
@@ -59,7 +59,7 @@ class <%= controller_class_name %>ControllerTest < Test::Unit::TestCase
     assert_not_nil <%= model_name %>.find(1)
   end
   
-  def test_destroy<%= suffix %>_post
+  def test_destroy<%= suffix %>_using_post
     assert_not_nil <%= model_name %>.find(1)
     
     post :destroy, :id => 1
@@ -69,7 +69,7 @@ class <%= controller_class_name %>ControllerTest < Test::Unit::TestCase
     assert_raise(ActiveRecord::RecordNotFound) { <%= model_name %>.find(1) }
   end
   
-  def test_edit<%= suffix %>_get
+  def test_edit<%= suffix %>_using_get
     get :edit<%= suffix %>, :id => 1
     
     assert_response :success
@@ -79,7 +79,7 @@ class <%= controller_class_name %>ControllerTest < Test::Unit::TestCase
     assert assigns(:<%= singular_name %>).valid?
   end
   
-  def test_edit<%= suffix %>_post
+  def test_edit<%= suffix %>_using_post
     post :edit<%= suffix %>, :id => 1
     assert_response :redirect
     assert_redirected_to :action => 'index<%= suffix %>', :id => 1
