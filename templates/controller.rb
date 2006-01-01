@@ -1,8 +1,8 @@
 class <%= controller_class_name %>Controller < ApplicationController
-  verify :only => [ :edit, :destroy ],
+  verify :only => [ :edit<%= suffix %>, :destroy<%= suffix %> ],
          :params => :id,
          :add_flash => { :notice => 'Missing <%= singular_name %> ID.' },
-         :redirect_to => { :action => 'index<%= suffix %>' }
+         :redirect_to => { :action => '<%= suffix || 'index' %>' }
   
 <% for action in untrestled_actions -%>
   def <%= action %><%= suffix %>
@@ -14,7 +14,7 @@ class <%= controller_class_name %>Controller < ApplicationController
       @<%= singular_name %> = <%= model_name %>.new(params[:<%= singular_name %>])
       if @<%= singular_name %>.save
         flash[:notice] = 'A new <%= singular_name %> was successfully added.'
-        redirect_to :action => 'index<%= suffix %>'
+        redirect_to :action => '<%= suffix || 'index' %>'
       end
     else
       @<%= singular_name %> = <%= model_name %>.new
@@ -25,7 +25,7 @@ class <%= controller_class_name %>Controller < ApplicationController
     if request.post?
       <%= model_name %>.find(params[:id]).destroy
       flash[:notice] = 'The <%= singular_name %> was successfully destroyed.'
-      redirect_to :action => 'index<%= suffix %>'
+      redirect_to :action => '<%= suffix || 'index' %>'
     else
       flash[:notice] = 'Click Destroy to destroy the <%= model_name %>.'
       redirect_to :action => 'edit<%= suffix %>', :id => params[:id]
@@ -37,22 +37,20 @@ class <%= controller_class_name %>Controller < ApplicationController
       @<%= singular_name %> = <%= model_name %>.find(params[:id])
       if @<%= singular_name %>.update_attributes(params[:<%= singular_name %>])
         flash[:notice] = 'The <%= singular_name %> was successfully edited.'
-        redirect_to :action => 'index<%= suffix %>', :id => @<%= singular_name %>
+        redirect_to :action => '<%= suffix || 'index' %>', :id => @<%= singular_name %>
       end
     else
       @<%= singular_name %> = <%= model_name %>.find(params[:id])
     end
   end
   
-<% unless suffix -%>
-  def index
+  def <%= suffix || 'index' %>
     if params[:id]
       @<%= singular_name %> = <%= model_name %>.find(params[:id])
-      render '<%= plural_name %>/_index<%= suffix %>_with_id'
+      render '<%= plural_name %>/_<%= suffix || 'index' %>_with_id'
     else
       @<%= singular_name %>_pages, @<%= plural_name %> = paginate(:<%= plural_name %>)
-      render '<%= plural_name %>/_index<%= suffix %>_without_id'
+      render '<%= plural_name %>/_<%= suffix || 'index' %>_without_id'
     end
   end
-<% end -%>
 end
