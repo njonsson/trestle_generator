@@ -6,5 +6,5 @@
 <%%= end_form_tag %>
 <%%= button_to 'Destroy', { :action => 'destroy<%= suffix %>', :id => @<%= singular_name %> }, :confirm => 'Are you sure you want to destroy this <%= singular_name %>?' %>
 
-<%%= link_to 'Show', :action => 'index<%= suffix %>', :id => @<%= singular_name %> %> |
-<%%= link_to 'Back to list', :action => 'index<%= suffix %>' %>
+<%%= link_to 'Show', :action => '<%= suffix || 'index' %>', :id => @<%= singular_name %> %> |
+<%%= link_to 'Back to list', :action => '<%= suffix || 'index' %>' %>

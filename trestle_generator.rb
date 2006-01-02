@@ -65,11 +65,12 @@ class TrestleGenerator < Rails::Generator::NamedBase
       # Check for class naming collisions.
       m.class_collisions controller_class_path, "#{controller_class_name}Controller", "#{controller_class_name}ControllerTest", "#{controller_class_name}Helper"
       
-      # Controller, helper, views, and test directories.
+      # Controller, helper, views, test, and config directories.
       m.directory File.join('app/controllers', controller_class_path)
       m.directory File.join('app/helpers', controller_class_path)
       m.directory File.join('app/views', controller_class_path, controller_file_name)
       m.directory File.join('test/functional', controller_class_path)
+      m.directory File.join('config', controller_class_path)
       
       # Depend on model generator but skip if the model exists.
       m.dependency 'model', [singular_name], :collision => :skip
@@ -126,6 +127,9 @@ class TrestleGenerator < Rails::Generator::NamedBase
         m.template "controller:view.rhtml", path,
                    :assigns => { :action => action, :path => path}
       end
+      
+      # Routes.
+      m.template 'routes.rb', 'config/routes.rb'
     end
   end
   
@@ -138,11 +142,11 @@ class TrestleGenerator < Rails::Generator::NamedBase
   end
   
   def trestle_views
-    %w(_index_without_id _index_with_id add_new edit)
+    %w(edit _index_without_id _index_with_id new)
   end
   
   def trestle_actions
-    %w(index add_new edit destroy)
+    %w(destroy edit index new)
   end
   
   def model_name 

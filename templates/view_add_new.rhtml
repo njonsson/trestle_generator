@@ -1,8 +1,0 @@
-<h1>New <%= singular_name %></h1>
-
-<%%= start_form_tag :action => 'add_new<%= @suffix %>' %>
-  <%%= render :partial => 'form' %>
-  <%%= submit_tag 'Save' %>
-<%%= end_form_tag %>
-
-<%%= link_to 'Back to list', :action => 'index<%= suffix %>' %>

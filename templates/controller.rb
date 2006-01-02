@@ -9,18 +9,6 @@ class <%= controller_class_name %>Controller < ApplicationController
   end
   
 <% end -%>
-  def add_new<%= suffix %>
-    if request.post?
-      @<%= singular_name %> = <%= model_name %>.new(params[:<%= singular_name %>])
-      if @<%= singular_name %>.save
-        flash[:notice] = 'A new <%= singular_name %> was successfully added.'
-        redirect_to :action => '<%= suffix || 'index' %>'
-      end
-    else
-      @<%= singular_name %> = <%= model_name %>.new
-    end
-  end
-  
   def destroy<%= suffix %>
     if request.post?
       <%= model_name %>.find(params[:id]).destroy
@@ -51,6 +39,18 @@ class <%= controller_class_name %>Controller < ApplicationController
     else
       @<%= singular_name %>_pages, @<%= plural_name %> = paginate(:<%= plural_name %>)
       render '<%= plural_name %>/_<%= suffix || 'index' %>_without_id'
+    end
+  end
+  
+  def new<%= suffix %>
+    if request.post?
+      @<%= singular_name %> = <%= model_name %>.new(params[:<%= singular_name %>])
+      if @<%= singular_name %>.save
+        flash[:notice] = 'A new <%= singular_name %> was successfully added.'
+        redirect_to :action => '<%= suffix || 'index' %>'
+      end
+    else
+      @<%= singular_name %> = <%= model_name %>.new
     end
   end
 end

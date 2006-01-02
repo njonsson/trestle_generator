@@ -27,26 +27,6 @@ class <%= controller_class_name %>ControllerTest < Test::Unit::TestCase
     assert_template '<%= plural_name %>/_<%= suffix || 'index' %>_without_id'
   end
   
-  def test_add_new<%= suffix %>_using_get
-    get :add_new<%= suffix %>
-    
-    assert_response :success
-    assert_template 'add_new<%= suffix %>'
-    
-    assert_not_nil assigns(:<%= singular_name %>)
-  end
-  
-  def test_add_new<%= suffix %>_using_post
-    num_<%= plural_name %> = <%= model_name %>.count
-    
-    post :add_new<%= suffix %>, :<%= singular_name %> => {}
-    
-    assert_response :redirect
-    assert_redirected_to :action => '<%= suffix || 'index' %>'
-    
-    assert_equal num_<%= plural_name %> + 1, <%= model_name %>.count
-  end
-  
   def test_destroy<%= suffix %>_using_get
     assert_not_nil <%= model_name %>.find(1)
     
@@ -100,5 +80,25 @@ class <%= controller_class_name %>ControllerTest < Test::Unit::TestCase
     
     assert_not_nil assigns(:<%= singular_name %>)
     assert assigns(:<%= singular_name %>).valid?
+  end
+  
+  def test_new<%= suffix %>_using_get
+    get :new<%= suffix %>
+    
+    assert_response :success
+    assert_template 'new<%= suffix %>'
+    
+    assert_not_nil assigns(:<%= singular_name %>)
+  end
+  
+  def test_new<%= suffix %>_using_post
+    num_<%= plural_name %> = <%= model_name %>.count
+    
+    post :new<%= suffix %>, :<%= singular_name %> => {}
+    
+    assert_response :redirect
+    assert_redirected_to :action => '<%= suffix || 'index' %>'
+    
+    assert_equal num_<%= plural_name %> + 1, <%= model_name %>.count
   end
 end
