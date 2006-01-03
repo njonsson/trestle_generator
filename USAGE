@@ -10,10 +10,10 @@ Description:
     automatically. Any views left over generate empty stubs.
     
     The trestled actions are:
-        index, add_new, edit, destroy
+        index, new, edit, destroy
     
     The trestled views are:
-        _index_without_id, _index_with_id, add_new, edit
+        _index_without_id, _index_with_id, new, edit
     
     If a controller name is not given, the plural form of the model name
     will be used. The model and controller names may be given in CamelCase

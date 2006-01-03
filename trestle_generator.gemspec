@@ -3,10 +3,9 @@ require 'rubygems'
 spec = Gem::Specification.new do |s|
   s.name = 'trestle_generator'
   s.version = '1.0.0'
-  s.summary = 'An adaptation of the Rails scaffold generator that produces ' +
+  s.summary = '[Rails] An adaptation of the scaffold generator that produces ' +
               'production-ready controllers that are safe from state-' +
-              'changing HTTP GET requests and have a streamlined controller ' +
-              'design'
+              'changing HTTP GET requests and that have streamlined URLs.'
   s.description = <<-EOF
     The name of this RubyGem points out that nobody intentionally sends a train
     across a gorge with nothing but a scaffold to support it. That’s what a
