@@ -8,6 +8,10 @@ spec = Gem::Specification.new do |s|
               'changing HTTP GET requests and have a streamlined controller ' +
               'design'
   s.description = <<-EOF
+    The name of this RubyGem points out that nobody intentionally sends a train
+    across a gorge with nothing but a scaffold to support it. That’s what a
+    trestle is for!
+    
     Why use the trestle generator instead of the scaffold generator? The trestle
     generator produces code that is closer to production-quality in two
     respects:

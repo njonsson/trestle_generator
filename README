@@ -2,6 +2,10 @@ The trestle generator is an adaptation of the Rails scaffold generator that
 produces production-ready controllers that are safe from state-changing HTTP GET
 requests and have a streamlined controller design.
 
+The name of this RubyGem points out that nobody intentionally sends a train
+across a gorge with nothing but a scaffold to support it. That’s what a trestle
+is for!
+
 Why use the trestle generator instead of the scaffold generator? The trestle
 generator produces code that is closer to production-quality in two respects:
 
