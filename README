@@ -6,20 +6,21 @@ Why use the trestle generator instead of the scaffold generator? The trestle
 generator produces code that is closer to production-quality in two respects:
 
 SAFETY  The trestle generator uses the HTTP POST method for actions that change
-data. Well-behaved web applications protect themselves against errant GET
+data. Well-behaved web applications protect themselves against errant HTTP GET
 requests (such as come from Google Web Accelerator and the like). The scaffold
 generator fails to do this.
 
-SIMPLICITY  The trestle generator produces controllers with just four actions
+USABILITY  The trestle generator produces controllers with just four actions
 (index, new, edit, and destroy). Controllers produced by the scaffold generator
 have eight actions. Fewer actions exposed to the outside world is better if the
-behavior of these actions is in line with the semantics of GET and POST. The net
-effect is that you will not have to throw away or tweak as much trestle-
-generated code as you do scaffold-generated code. Less work for you means your
-application gets built sooner and better.
+behavior of these actions is in line with the semantics of HTTP GET and HTTP
+POST. The net effect is that you will not have to throw away or tweak as much
+trestle-generated code as you do scaffold-generated code. Less work for you
+means your application gets built sooner. Tobias Lütke’s postback_generator
+RubyGem has the same idea.
 
 The scaffold generator produces a controller with the following public interface
-for a database table named 'people':
+for a database table named ‘people’:
 
 +--------------------+---------------------------------------------------------+
 | URL                | Result                                                  |
@@ -38,25 +39,25 @@ for a database table named 'people':
 
 Contrast this with the public interface produced by the trestle generator:
 
-+--------------------+------------+--------------------------------------------+
-| URL                |   Method   | Result                                     |
-+--------------------+------------+--------------------------------------------+
-| /people            |   (any)    | Lists existing person records              |
-| /people/new        | (not POST) | Shows an empty person form                 |
-| /people/new        |    POST    | Creates a new person record from request   |
-|                    |            | parameters                                 |
-| /people/99         |   (any)    | Shows the person record having ID 99       |
-| /people/99/edit    | (not POST) | Shows a person form for the person record  |
-|                    |            | having ID 99                               |
-| /people/99/edit    |    POST    | Updates the person record having ID 99     |
-|                    |            | using request parameters                   |
-| /people/99/destroy | (not POST) | Redirects to the person form with a notice |
-|                    |            | that the user must click the form’s        |
-|                    |            | Destroy button in order to destroy a       |
-|                    |            | record                                     |
-| /people/99/destroy |    POST    | Deletes the person record having ID 99     |
-|                    |            | after prompting the user for confirmation  |
-+--------------------+------------+--------------------------------------------+
++--------------------+-------------+-------------------------------------------+
+| URL                | HTTP Method | Result                                    |
++--------------------+-------------+-------------------------------------------+
+| /people            | GET or POST | Lists existing person records             |
+| /people/new        |     GET     | Shows an empty person form                |
+| /people/new        |    POST     | Creates a new person record from request  |
+|                    |             | parameters                                |
+| /people/99         | GET or POST | Shows the person record having ID 99      |
+| /people/99/edit    |     GET     | Shows a person form for the person record |
+|                    |             | having ID 99                              |
+| /people/99/edit    |    POST     | Updates the person record having ID 99    |
+|                    |             | using request parameters                  |
+| /people/99/destroy |     GET     | Redirects to /people/99/edit with a       |
+|                    |             | notice that the user must click the       |
+|                    |             | form’s Destroy button in order to destroy |
+|                    |             | a record                                  |
+| /people/99/destroy |    POST     | Deletes the person record having ID 99    |
+|                    |             | after prompting the user for confirmation |
++--------------------+-------------+-------------------------------------------+
 
 Notice the hierarchical nature of trestle URLs. Because the ID comes before the
 verb, there are fewer illegal variations that with scaffold URLs. This

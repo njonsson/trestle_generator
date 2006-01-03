@@ -14,19 +14,20 @@ spec = Gem::Specification.new do |s|
     
     SAFETY  The trestle generator uses the HTTP POST method for actions that
     change data. Well-behaved web applications protect themselves against errant
-    GET requests (such as come from Google Web Accelerator and the like). The
-    scaffold generator fails to do this.
+    HTTP GET requests (such as come from Google Web Accelerator and the like).
+    The scaffold generator fails to do this.
     
-    SIMPLICITY  The trestle generator produces controllers with just four
-    actions (index, new, edit, and destroy). Controllers produced by the
-    scaffold generator have eight actions. Fewer actions exposed to the outside
-    world is better if the behavior of these actions is in line with the
-    semantics of GET and POST. The net effect is that you will not have to throw
+    USABILITY  The trestle generator produces controllers with just four actions
+    (index, new, edit, and destroy). Controllers produced by the scaffold
+    generator have eight actions. Fewer actions exposed to the outside world is
+    better if the behavior of these actions is in line with the semantics of
+    HTTP GET and HTTP POST. The net effect is that you will not have to throw
     away or tweak as much trestle-generated code as you do scaffold-generated
-    code. Less work for you means your application gets built sooner and better.
+    code. Less work for you means your application gets built sooner. Tobias
+    Lütke’s postback_generator RubyGem has the same idea.
     
     The scaffold generator produces a controller with the following public
-    interface for a database table named 'people':
+    interface for a database table named ‘people’:
     
     /people - lists existing person records
     
@@ -59,7 +60,7 @@ spec = Gem::Specification.new do |s|
     ID 99; HTTP POST updates the person record having ID 99 using request
     parameters
     
-    /people/99/destroy - HTTP GET redirects to the person form with a notice
+    /people/99/destroy - HTTP GET redirects to /people/99/edit with a notice
     that the user must click the form’s Destroy button to destroy a record; HTTP
     POST deletes the person record having ID 99 after prompting the user for
     confirmation
