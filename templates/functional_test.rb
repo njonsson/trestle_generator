@@ -15,14 +15,14 @@ class <%= controller_class_name %>ControllerTest < Test::Unit::TestCase
   
 <% for action in untrestled_actions -%>
   def test_<%= action %>
-    get :<%= action %>
+    get '<%= action %>'
     assert_response :success
     assert_template '<%= action %>'
   end
   
 <% end -%>
   def test_<%= suffix || 'index' %>
-    get :<%= suffix || 'index' %>
+    get '<%= suffix || 'index' %>'
     assert_response :success
     assert_template '<%= plural_name %>/_<%= suffix || 'index' %>_without_id'
   end
@@ -30,7 +30,7 @@ class <%= controller_class_name %>ControllerTest < Test::Unit::TestCase
   def test_destroy<%= suffix %>_using_get
     assert_not_nil <%= model_name %>.find(1)
     
-    get :destroy<%= suffix %>, :id => 1
+    get 'destroy<%= suffix %>', :id => 1
     assert_response :redirect
     assert_redirected_to :action => 'edit<%= suffix %>'
     
@@ -40,7 +40,7 @@ class <%= controller_class_name %>ControllerTest < Test::Unit::TestCase
   def test_destroy<%= suffix %>_using_post
     assert_not_nil <%= model_name %>.find(1)
     
-    post :destroy<%= suffix %>, :id => 1
+    post 'destroy<%= suffix %>', :id => 1
     assert_response :redirect
     assert_redirected_to :action => '<%= suffix || 'index' %>'
     
@@ -48,7 +48,7 @@ class <%= controller_class_name %>ControllerTest < Test::Unit::TestCase
   end
   
   def test_edit<%= suffix %>_using_get
-    get :edit<%= suffix %>, :id => 1
+    get 'edit<%= suffix %>', :id => 1
     
     assert_response :success
     assert_template 'edit<%= suffix %>'
@@ -58,13 +58,13 @@ class <%= controller_class_name %>ControllerTest < Test::Unit::TestCase
   end
   
   def test_edit<%= suffix %>_using_post
-    post :edit<%= suffix %>, :id => 1
+    post 'edit<%= suffix %>', :id => 1
     assert_response :redirect
     assert_redirected_to :action => '<%= suffix || 'index' %>', :id => 1
   end
   
   def test_<%= suffix || 'index' %>_without_id
-    get :<%= suffix || 'index' %>
+    get '<%= suffix || 'index' %>'
     
     assert_response :success
     assert_template '<%= plural_name %>/_<%= suffix || 'index' %>_without_id'
@@ -73,7 +73,7 @@ class <%= controller_class_name %>ControllerTest < Test::Unit::TestCase
   end
   
   def test_<%= suffix || 'index' %>_with_id
-    get :<%= suffix || 'index' %>, :id => 1
+    get '<%= suffix || 'index' %>', :id => 1
     
     assert_response :success
     assert_template '<%= plural_name %>/_<%= suffix || 'index' %>_with_id'
@@ -83,7 +83,7 @@ class <%= controller_class_name %>ControllerTest < Test::Unit::TestCase
   end
   
   def test_new<%= suffix %>_using_get
-    get :new<%= suffix %>
+    get 'new<%= suffix %>'
     
     assert_response :success
     assert_template 'new<%= suffix %>'
@@ -94,7 +94,7 @@ class <%= controller_class_name %>ControllerTest < Test::Unit::TestCase
   def test_new<%= suffix %>_using_post
     num_<%= plural_name %> = <%= model_name %>.count
     
-    post :new<%= suffix %>, :<%= singular_name %> => {}
+    post 'new<%= suffix %>', :<%= singular_name %> => {}
     
     assert_response :redirect
     assert_redirected_to :action => '<%= suffix || 'index' %>'
