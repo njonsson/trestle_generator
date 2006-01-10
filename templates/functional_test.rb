@@ -13,7 +13,7 @@ class <%= controller_class_name %>ControllerTest < Test::Unit::TestCase
     @response   = ActionController::TestResponse.new
   end
   
-<% for action in untrestled_actions -%>
+<% for action in nontrestle_actions -%>
   def test_<%= action %>
     get '<%= action %>'
     assert_response :success

@@ -75,7 +75,7 @@ class TrestleGenerator < Rails::Generator::NamedBase
       # Depend on model generator but skip if the model exists.
       m.dependency 'model', [singular_name], :collision => :skip
       
-      # Scaffolded forms.
+      # Trestle forms.
       m.complex_template "form.rhtml",
         File.join('app/views',
                   controller_class_path,
@@ -87,7 +87,7 @@ class TrestleGenerator < Rails::Generator::NamedBase
         :end_mark => 'eoform',
         :mark_id => singular_name
       
-      # Scaffolded views.
+      # Trestle views.
       trestle_views.each do |action|
         m.template "view_#{action}.rhtml",
                    File.join('app/views',
@@ -118,8 +118,8 @@ class TrestleGenerator < Rails::Generator::NamedBase
       m.template 'style.css',     'public/stylesheets/trestle.css'
       
       
-      # Untrestled views.
-      untrestled_actions.each do |action|
+      # Non-trestle views.
+      nontrestle_actions.each do |action|
         path = File.join('app/views',
                           controller_class_path,
                           controller_file_name,
@@ -153,7 +153,7 @@ class TrestleGenerator < Rails::Generator::NamedBase
     class_name.demodulize
   end
   
-  def untrestled_actions
+  def nontrestle_actions
     args - trestle_actions
   end
   

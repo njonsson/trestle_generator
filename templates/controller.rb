@@ -1,10 +1,10 @@
 class <%= controller_class_name %>Controller < ApplicationController
-  verify :only => [ :edit<%= suffix %>, :destroy<%= suffix %> ],
+  verify :only => [ 'destroy<%= suffix %>', 'edit<%= suffix %>' ],
          :params => :id,
          :add_flash => { :notice => 'Missing <%= singular_name %> ID.' },
          :redirect_to => { :action => '<%= suffix || 'index' %>' }
   
-<% for action in untrestled_actions -%>
+<% for action in nontrestle_actions -%>
   def <%= action %><%= suffix %>
   end
   
