@@ -1,18 +1,18 @@
 Description:
-    The trestle generator (an adaptation of the Rails scaffold generator)
-    creates a controller to interact with a model. If the model does not exist,
-    it creates the model as well. The generated code is equivalent to the
-    "scaffold :model" declaration, making it easy to migrate when you wish to
-    customize your controller and views.
+    The trestle generator (a drop-in replacement for the Rails scaffold
+    generator) creates a controller and views to interact with a model. If the
+    model does not exist, it creates the model as well. The generated code is
+    equivalent to the "scaffold :model" declaration, making it easy to migrate
+    when you wish to customize your controller and views.
     
     The generator takes a model name, an optional controller name, and a
-    list of views as arguments. Trestled actions and views are created
+    list of views as arguments. Trestle actions and views are created
     automatically. Any views left over generate empty stubs.
     
-    The trestled actions are:
+    The trestle actions are:
         index, new, edit, destroy
     
-    The trestled views are:
+    The trestle views are:
         _index_without_id, _index_with_id, new, edit
     
     If a controller name is not given, the plural form of the model name

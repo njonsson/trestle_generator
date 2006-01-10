@@ -3,76 +3,86 @@ require 'rubygems'
 spec = Gem::Specification.new do |s|
   s.name = 'trestle_generator'
   s.version = '1.0.1'
-  s.summary = '[Rails] An adaptation of the scaffold generator that produces ' +
-              'production-ready controllers that are safe from state-' +
+  s.summary = '[Rails] A drop-in replacement for the scaffold generator that ' +
+              'produces production-ready controllers that are safe from state-' +
               'changing HTTP GET requests and that have streamlined URLs.'
   s.description = <<-EOF
-    The name of this RubyGem points out that nobody intentionally sends a train
-    across a gorge with nothing but a scaffold to support it. That’s what a
-    trestle is for!
+    Don’t drive your train across a gorge with nothing but a scaffold underneath
+    it. Use a trestle instead!
     
-    Why use the trestle generator instead of the scaffold generator? The trestle
-    generator produces code that is closer to production-quality in two
-    respects:
+    The trestle generator is drop-in replacement for the Rails scaffold
+    generator. Unlike scaffolding, trestle controllers protect your models from
+    state-changing HTTP GET requests. They also have streamlined URLs that make
+    your application more usable.
     
-    SAFETY  The trestle generator uses the HTTP POST method for actions that
+    SAFETY  The trestle generator requires the HTTP POST method for actions that
     change data. Well-behaved web applications protect themselves against errant
-    HTTP GET requests (such as come from Google Web Accelerator and the like).
-    The scaffold generator fails to do this.
+    HTTP GET requests such as come from Google Web Accelerator and the like.
+    Scaffolded controllers fail to do this.
     
-    USABILITY  The trestle generator produces controllers with just four actions
-    (index, new, edit, and destroy). Controllers produced by the scaffold
-    generator have eight actions. Fewer actions exposed to the outside world is
-    better if the behavior of these actions is in line with the semantics of
-    HTTP GET and HTTP POST. The net effect is that you will not have to throw
-    away or tweak as much trestle-generated code as you do scaffold-generated
-    code. Less work for you means your application gets built sooner. Tobias
-    Lütke’s postback_generator RubyGem has the same idea.
+    USABILITY  Trestle controllers have just four actions (index, new, edit, and
+    destroy). The scaffold generator produces controllers that have eight
+    actions. Fewer actions exposed to the outside world is better if the
+    behavior of these actions is in line with the semantics of HTTP GET and HTTP
+    POST. The net effect of this design improvement is that you will not have to
+    throw away or tweak as much trestle-generated code as you do
+    scaffold-generated code. Less work for you means your application gets built
+    sooner. Tobias Lütke’s postback_generator RubyGem had the same idea, but
+    trestle goes further.
     
-    The scaffold generator produces a controller with the following public
-    interface for a database table named ‘people’:
+    A scaffold for a database table named ‘people’ has the following HTTP
+    interface:
     
-    /people - lists existing person records
+    /people - Lists existing person records
     
-    /people/list - lists existing person records
+    /people/list - Lists existing person records
     
-    /people/new - shows an empty person form
+    /people/new - Shows an empty person form
     
-    /people/create - creates a new person record from request parameters
+    /people/create - Creates a new person record from request parameters
     
-    /people/show/99 - shows the person record having ID 99
+    /people/show/99 - Shows the person record having ID 99
     
-    /people/edit/99 - shows a person form for the person record having ID 99
+    /people/edit/99 - Shows a person form for the person record having ID 99
     
-    /people/update/99 - updates the person record having ID 99 using request
-    parameters
+    /people/update/99 - Updates the person record having ID 99 using request
+                        parameters
     
-    /people/destroy/99 - deletes the person record having ID 99, even for HTTP
-    GET!
+    /people/destroy/99 - Deletes the person record having ID 99, even for HTTP
+                         GET!
     
-    Contrast this with the public interface produced by the trestle generator:
+    Contrast this with the HTTP interface of the equivalent trestle controller:
     
-    /people - lists existing person records
+    /people - GET or POST lists existing person records
     
-    /people/new - HTTP GET shows an empty person form; HTTP POST creates a new
-    person record from request parameters
+    /people/new - GET shows an empty person form
     
-    /people/99 - shows the person record having ID 99
+    /people/new - POST creates a new person record from request
+                  parameters
+                  
+    /people/99 - GET or POST shows the person record having ID 99
     
-    /people/99/edit - HTTP GET shows a person form for the person record having
-    ID 99; HTTP POST updates the person record having ID 99 using request
-    parameters
+    /people/99/edit - GET shows a person form for the person record having ID 99
     
-    /people/99/destroy - HTTP GET redirects to /people/99/edit with a notice
-    that the user must click the form’s Destroy button to destroy a record; HTTP
-    POST deletes the person record having ID 99 after prompting the user for
-    confirmation
+    /people/99/edit - POST updates the person record having ID 99 using request
+                      parameters
+    /people/99/destroy - GET redirects to /people/99/edit with a notice that the
+                         user must click the form’s Destroy button in order to
+                         destroy a record
+    
+    /people/99/destroy - POST deletes the person record having ID 99 after
+                         prompting the user for confirmation
     
     Notice the hierarchical nature of trestle URLs. Because the ID comes before
-    the verb, there are fewer illegal variations that with scaffold URLs. This
-    encourages the user to use the Up One Level button on the Google Toolbar
-    that clips one element off the end of the current URL. Scaffold URLs do not
-    play nicely with the Up One Level button.
+    the verb, the user can click the Up One Level button on the Google Toolbar
+    to explore the application. (The Up One Level button clips one element off
+    the end of the current URL.) Scaffold URLs do not play nicely with the Up
+    One Level button.
+    
+    Trestle controllers are pain relief to users who like the Up One Level
+    button. But for a user who likes to type URLs in by hand, it also shows a
+    friendly notice if his request is missing an ID. This is one more way to
+    improve usability.
   EOF
   s.add_dependency('rails', '>= 1.0.0')
   s.files = Dir.glob('*.rb') + Dir.glob('USAGE') + Dir.glob('templates/*')
