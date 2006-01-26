@@ -15,7 +15,7 @@ class <%= controller_class_name %>Controller < ApplicationController
       flash[:notice] = 'The <%= singular_name %> was successfully destroyed.'
       redirect_to :action => '<%= suffix || 'index' %>'
     else
-      flash[:notice] = 'Click Destroy to destroy the <%= model_name %>.'
+      flash[:notice] = 'Click Destroy to destroy the <%= singular_name %>.'
       redirect_to :action => 'edit<%= suffix %>', :id => params[:id]
     end
   end
