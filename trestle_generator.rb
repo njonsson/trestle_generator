@@ -1,12 +1,12 @@
 class TrestleSandbox
   include ActionView::Helpers::ActiveRecordHelper
-  
+
   attr_accessor :form_action, :singular_name, :suffix, :model_instance
-  
+
   def sandbox_binding
     binding
   end
-  
+
   def default_input_block
     Proc.new { |record, column| "<p><label for=\"#{record}_#{column.name}\">#{column.human_name}</label><br/>\n#{input(record, column.name)}</p>\n" }
   end
@@ -17,15 +17,15 @@ class ActionView::Helpers::InstanceTag
     field_meth = "#{field_type}_field"
     "<%= #{field_meth} '#{@object_name}', '#{@method_name}' #{options.empty? ? '' : ', '+options.inspect} %>"
   end
-  
+
   def to_text_area_tag(options = {})
     "<%= text_area '#{@object_name}', '#{@method_name}' #{options.empty? ? '' : ', '+ options.inspect} %>"
   end
-  
+
   def to_date_select_tag(options = {})
     "<%= date_select '#{@object_name}', '#{@method_name}' #{options.empty? ? '' : ', '+ options.inspect} %>"
   end
-  
+
   def to_datetime_select_tag(options = {})
     "<%= datetime_select '#{@object_name}', '#{@method_name}' #{options.empty? ? '' : ', '+ options.inspect} %>"
   end
@@ -45,36 +45,36 @@ class TrestleGenerator < Rails::Generator::NamedBase
 
   def initialize(runtime_args, runtime_options = {})
     super
-    
+
     # Take controller name from the next argument. Default to the pluralized model name.
     @controller_name = args.shift
     @controller_name ||= ActiveRecord::Base.pluralize_table_names ? @name.pluralize : @name
-    
+
     base_name, @controller_class_path, @controller_file_path, @controller_class_nesting, @controller_class_nesting_depth = extract_modules(@controller_name)
     @controller_class_name_without_nesting, @controller_singular_name, @controller_plural_name = inflect_names(base_name)
-    
+
     if @controller_class_nesting.empty?
       @controller_class_name = @controller_class_name_without_nesting
     else
       @controller_class_name = "#{@controller_class_nesting}::#{@controller_class_name_without_nesting}"
     end
   end
-  
+
   def manifest
     record do |m|
       # Check for class naming collisions.
       m.class_collisions controller_class_path, "#{controller_class_name}Controller", "#{controller_class_name}ControllerTest", "#{controller_class_name}Helper"
-      
+
       # Controller, helper, views, test, and config directories.
       m.directory File.join('app/controllers', controller_class_path)
       m.directory File.join('app/helpers', controller_class_path)
       m.directory File.join('app/views', controller_class_path, controller_file_name)
       m.directory File.join('test/functional', controller_class_path)
       m.directory File.join('config', controller_class_path)
-      
+
       # Depend on model generator but skip if the model exists.
       m.dependency 'model', [singular_name], :collision => :skip
-      
+
       # Trestle forms.
       m.complex_template "form.rhtml",
         File.join('app/views',
@@ -86,7 +86,7 @@ class TrestleGenerator < Rails::Generator::NamedBase
         :begin_mark => 'form',
         :end_mark => 'eoform',
         :mark_id => singular_name
-      
+
       # Trestle views.
       trestle_views.each do |action|
         m.template "view_#{action}.rhtml",
@@ -96,28 +96,28 @@ class TrestleGenerator < Rails::Generator::NamedBase
                              "#{action}.rhtml"),
                    :assigns => { :action => action }
       end
-      
+
       # Controller class, functional test, helper, and views.
       m.template 'controller.rb',
                   File.join('app/controllers',
                             controller_class_path,
                             "#{controller_file_name}_controller.rb")
-      
+
       m.template 'functional_test.rb',
                   File.join('test/functional',
                             controller_class_path,
                             "#{controller_file_name}_controller_test.rb")
-      
+
       m.template 'helper.rb',
                   File.join('app/helpers',
                             controller_class_path,
                             "#{controller_file_name}_helper.rb")
-      
+
       # Layout and stylesheet.
       m.template 'layout.rhtml',  "app/views/layouts/#{controller_file_name}.rhtml"
       m.template 'style.css',     'public/stylesheets/trestle.css'
-      
-      
+
+
       # Non-trestle views.
       nontrestle_actions.each do |action|
         path = File.join('app/views',
@@ -127,40 +127,40 @@ class TrestleGenerator < Rails::Generator::NamedBase
         m.template "controller:view.rhtml", path,
                    :assigns => { :action => action, :path => path}
       end
-      
+
       # Routes.
       m.template 'routes.rb', 'config/routes.rb'
     end
   end
-  
-  
+
+
   protected
-  
+
   # Override with your own usage banner.
   def banner
     "Usage: #{$0} trestle ModelName [ControllerName] [action, ...]"
   end
-  
+
   def trestle_views
     %w(edit list new show)
   end
-  
+
   def trestle_actions
     %w(destroy edit list new show)
   end
-  
+
   def model_name 
     class_name.demodulize
   end
-  
+
   def nontrestle_actions
     args - trestle_actions
   end
-  
+
   def suffix
     "_#{singular_name}" if options[:suffix]
   end
-  
+
   def create_sandbox
     sandbox = TrestleSandbox.new
     sandbox.singular_name = singular_name
@@ -174,7 +174,7 @@ class TrestleGenerator < Rails::Generator::NamedBase
     sandbox.suffix = suffix
     sandbox
   end
-  
+
   def model_instance
     base = class_nesting.split('::').inject(Object) do |base, nested|
       break base.const_get(nested) if base.const_defined?(nested)

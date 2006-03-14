@@ -4,17 +4,17 @@ Description:
     model does not exist, it creates the model as well. The generated code is
     equivalent to the "scaffold :model" declaration, making it easy to migrate
     when you wish to customize your controller and views.
-    
+
     The generator takes a model name, an optional controller name, and a
     list of views as arguments. Trestle actions and views are created
     automatically. Any views left over generate empty stubs.
-    
+
     The trestle actions are:
         list, new, show, edit, destroy
-    
+
     The trestle views are:
         list, new, show, edit
-    
+
     If a controller name is not given, the plural form of the model name
     will be used. The model and controller names may be given in CamelCase
     or under_score and should not be suffixed with 'Model' or 'Controller'.
@@ -23,13 +23,13 @@ Description:
 
 Example:
     ./script/generate trestle Account Bank debit credit
-    
+
     This will generate an Account model and BankController with a full test
     suite and a basic user interface. Now create the accounts table in your
     database and browse to http://localhost/bank/ -- voila, you're on Rails!
 
 Modules Example:
     ./script/generate trestle CreditCard 'admin/credit_card' suspend late_fee
-    
+
     This will generate a CreditCard model and CreditCardController controller
     in the admin module.

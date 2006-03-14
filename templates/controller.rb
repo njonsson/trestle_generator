@@ -3,11 +3,11 @@ class <%= controller_class_name %>Controller < ApplicationController
          :params => :id,
          :add_flash => { :notice => 'Missing <%= singular_name %> ID.' },
          :redirect_to => { :action => 'list<%= suffix %>' }
-  
+
 <% for action in nontrestle_actions -%>
   def <%= action %><%= suffix %>
   end
-  
+
 <% end -%>
   def destroy<%= suffix %>
     if request.post?
@@ -19,7 +19,7 @@ class <%= controller_class_name %>Controller < ApplicationController
       redirect_to :action => 'edit<%= suffix %>', :id => params[:id]
     end
   end
-  
+
   def edit<%= suffix %>
     if request.post?
       @<%= singular_name %> = <%= model_name %>.find(params[:id])
@@ -31,11 +31,11 @@ class <%= controller_class_name %>Controller < ApplicationController
       @<%= singular_name %> = <%= model_name %>.find(params[:id])
     end
   end
-  
+
   def list<%= suffix %>
     @<%= singular_name %>_pages, @<%= plural_name %> = paginate(:<%= plural_name %>)
   end
-  
+
   def new<%= suffix %>
     if request.post?
       @<%= singular_name %> = <%= model_name %>.new(params[:<%= singular_name %>])
@@ -47,7 +47,7 @@ class <%= controller_class_name %>Controller < ApplicationController
       @<%= singular_name %> = <%= model_name %>.new
     end
   end
-  
+
   def show<%= suffix %>
     @<%= singular_name %> = <%= model_name %>.find(params[:id])
   end
