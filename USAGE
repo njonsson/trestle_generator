@@ -10,10 +10,10 @@ Description:
     automatically. Any views left over generate empty stubs.
     
     The trestle actions are:
-        index, new, edit, destroy
+        list, new, show, edit, destroy
     
     The trestle views are:
-        _index_without_id, _index_with_id, new, edit
+        list, new, show, edit
     
     If a controller name is not given, the plural form of the model name
     will be used. The model and controller names may be given in CamelCase

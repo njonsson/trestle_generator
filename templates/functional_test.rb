@@ -21,12 +21,6 @@ class <%= controller_class_name %>ControllerTest < Test::Unit::TestCase
   end
   
 <% end -%>
-  def test_<%= suffix || 'index' %>
-    get '<%= suffix || 'index' %>'
-    assert_response :success
-    assert_template '<%= plural_name %>/_<%= suffix || 'index' %>_without_id'
-  end
-  
   def test_destroy<%= suffix %>_using_get
     assert_not_nil <%= model_name %>.find(1)
     
@@ -42,7 +36,7 @@ class <%= controller_class_name %>ControllerTest < Test::Unit::TestCase
     
     post 'destroy<%= suffix %>', :id => 1
     assert_response :redirect
-    assert_redirected_to :action => '<%= suffix || 'index' %>'
+    assert_redirected_to :action => 'list<%= suffix %>'
     
     assert_raise(ActiveRecord::RecordNotFound) { <%= model_name %>.find(1) }
   end
@@ -60,26 +54,16 @@ class <%= controller_class_name %>ControllerTest < Test::Unit::TestCase
   def test_edit<%= suffix %>_using_post
     post 'edit<%= suffix %>', :id => 1
     assert_response :redirect
-    assert_redirected_to :action => '<%= suffix || 'index' %>', :id => 1
+    assert_redirected_to :action => 'show<%= suffix %>', :id => 1
   end
   
-  def test_<%= suffix || 'index' %>_without_id
-    get '<%= suffix || 'index' %>'
+  def test_list<%= suffix %>
+    get 'list<%= suffix %>'
     
     assert_response :success
-    assert_template '<%= plural_name %>/_<%= suffix || 'index' %>_without_id'
+    assert_template '<%= plural_name %>/list<%= suffix %>'
     
     assert_not_nil assigns(:<%= plural_name %>)
-  end
-  
-  def test_<%= suffix || 'index' %>_with_id
-    get '<%= suffix || 'index' %>', :id => 1
-    
-    assert_response :success
-    assert_template '<%= plural_name %>/_<%= suffix || 'index' %>_with_id'
-    
-    assert_not_nil assigns(:<%= singular_name %>)
-    assert assigns(:<%= singular_name %>).valid?
   end
   
   def test_new<%= suffix %>_using_get
@@ -97,8 +81,18 @@ class <%= controller_class_name %>ControllerTest < Test::Unit::TestCase
     post 'new<%= suffix %>', :<%= singular_name %> => {}
     
     assert_response :redirect
-    assert_redirected_to :action => '<%= suffix || 'index' %>'
+    assert_redirected_to :action => 'list<%= suffix %>'
     
     assert_equal num_<%= plural_name %> + 1, <%= model_name %>.count
+  end
+  
+  def test_show<%= suffix %>
+    get 'show<%= suffix %>', :id => 1
+    
+    assert_response :success
+    assert_template '<%= plural_name %>/show<%= suffix %>'
+    
+    assert_not_nil assigns(:<%= singular_name %>)
+    assert assigns(:<%= singular_name %>).valid?
   end
 end

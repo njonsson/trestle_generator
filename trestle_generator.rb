@@ -142,11 +142,11 @@ class TrestleGenerator < Rails::Generator::NamedBase
   end
   
   def trestle_views
-    %w(edit _index_without_id _index_with_id new)
+    %w(edit list new show)
   end
   
   def trestle_actions
-    %w(destroy edit index new)
+    %w(destroy edit list new show)
   end
   
   def model_name 
