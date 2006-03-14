@@ -20,9 +20,9 @@ spec = Gem::Specification.new do |s|
     HTTP GET requests such as come from Google Web Accelerator and the like.
     Scaffolded controllers fail to do this.
     
-    USABILITY  Trestle controllers have just four actions (index, new, edit, and
-    destroy). The scaffold generator produces controllers that have eight
-    actions. Fewer actions exposed to the outside world is better if the
+    USABILITY  Trestle controllers have just five actions (list, new, show,
+    edit, and destroy). The scaffold generator produces controllers that have
+    eight actions. Fewer actions exposed to the outside world is better if the
     behavior of these actions is in line with the semantics of HTTP GET and HTTP
     POST. The net effect of this design improvement is that you will not have to
     throw away or tweak as much trestle-generated code as you do
