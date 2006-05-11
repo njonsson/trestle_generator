@@ -141,7 +141,10 @@ spec = Gem::Specification.new do |s|
     -- /\/. _/.
     Nils Jonsson
   EOF
-  s.files = Dir.glob('*.rb') + Dir.glob('USAGE') + Dir.glob('templates/*')
+  s.files = Dir.glob('*.rb')   +
+            Dir.glob('README') +
+            Dir.glob('USAGE')  +
+            Dir.glob('templates/*')
   s.files.delete_if { |item| item.include?(".gemspec") || item.include?(".svn") }
   s.require_path = 'templates'
   s.requirements << 'Ruby on Rails v1.0.0 or later'
