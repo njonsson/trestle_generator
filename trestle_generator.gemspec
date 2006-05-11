@@ -26,7 +26,7 @@ spec = Gem::Specification.new do |s|
 
     Trestles have two advantages over scaffolds:
 
-    * Better handling of HTTP POST and GET requests
+    * More elegant handling of HTTP POST and GET requests
     * A streamlined URL structure that makes your application easier to use
 
     Downloading and installation is a breeze with RubyGems, the package manager
