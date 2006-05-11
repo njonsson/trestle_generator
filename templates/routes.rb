@@ -18,12 +18,12 @@ ActionController::Routing::Routes.draw do |map|
   map.connect ':controller/service.wsdl', :action => 'wsdl'
 
   # Install the default route as the lowest priority.
-  ID_REQUIREMENT     = /[\d]+/
-  ACTION_REQUIREMENT = /[A-Za-z]\S*/
+  id_requirement     = /[\d]+/
+  action_requirement = /[A-Za-z]\S*/
   map.connect ':controller/:action', :action => 'list<%= suffix %>',
-                                     :requirements => { :action => ACTION_REQUIREMENT }
+                                     :requirements => { :action => action_requirement }
   map.connect ':controller/:id', :action => 'show<%= suffix %>',
-                                 :requirements => { :id => ID_REQUIREMENT }
-  map.connect ':controller/:id/:action', :requirements => { :id     => ID_REQUIREMENT,
-                                                            :action => ACTION_REQUIREMENT }
+                                 :requirements => { :id => id_requirement }
+  map.connect ':controller/:id/:action', :requirements => { :id     => id_requirement,
+                                                            :action => action_requirement }
 end
