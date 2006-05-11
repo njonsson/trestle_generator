@@ -73,7 +73,7 @@ class TrestleGenerator < Rails::Generator::NamedBase
       m.directory File.join('config', controller_class_path)
 
       # Depend on model generator but skip if the model exists.
-      m.dependency 'model', [singular_name], :collision => :skip
+      m.dependency 'model', [singular_name], :collision => :skip, :skip_migration => true
 
       # Trestle forms.
       m.complex_template "form.rhtml",
