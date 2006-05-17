@@ -46,7 +46,7 @@ solve the problem of GET vs POST more cleanly and comprehensively.
 Why switch from scaffolds to trestles? USABILITY
 --------------------------------------------------------------------------------
 
-Trestle controllers have just four actions (index, new, edit, and destroy).
+Trestle controllers have just five actions (list, new, show, edit, and destroy).
 Contrast this with scaffold controllers which have eight actions to implement
 the same functionality. This is mostly a matter of taste, but Rails developers
 appreciate more than most that “less is more.”
