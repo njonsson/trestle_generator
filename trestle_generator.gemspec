@@ -2,7 +2,7 @@ require 'rubygems'
 
 spec = Gem::Specification.new do |s|
   s.name = 'trestle_generator'
-  s.version = '1.1.4'
+  s.version = '1.1.5'
   s.summary = '[Rails] A drop-in replacement for the scaffold generator that ' +
               'produces production-ready controllers that are safe from '      +
               'state-changing HTTP GET requests and that have streamlined URLs.'
