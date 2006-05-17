@@ -41,6 +41,17 @@ class <%= controller_class_name %>ControllerTest < Test::Unit::TestCase
     assert_raise(ActiveRecord::RecordNotFound) { <%= model_name %>.find(1) }
   end
 
+  def test_destroy<%= suffix %>_without_id
+    assert_not_nil <%= model_name %>.find(1)
+
+    post 'destroy<%= suffix %>'
+    assert_response :redirect
+    assert_redirected_to :action => 'list<%= suffix %>'
+    assert flash.has_key?(:notice)
+
+    assert_not_nil <%= model_name %>.find(1)
+  end
+
   def test_edit<%= suffix %>_using_get
     get 'edit<%= suffix %>', :id => 1
 
@@ -55,6 +66,13 @@ class <%= controller_class_name %>ControllerTest < Test::Unit::TestCase
     post 'edit<%= suffix %>', :id => 1
     assert_response :redirect
     assert_redirected_to :action => 'show<%= suffix %>', :id => 1
+  end
+
+  def test_edit<%= suffix %>_without_id
+    post 'edit<%= suffix %>'
+    assert_response :redirect
+    assert_redirected_to :action => 'list<%= suffix %>'
+    assert flash.has_key?(:notice)
   end
 
   def test_list<%= suffix %>
@@ -94,5 +112,13 @@ class <%= controller_class_name %>ControllerTest < Test::Unit::TestCase
 
     assert_not_nil assigns(:<%= singular_name %>)
     assert assigns(:<%= singular_name %>).valid?
+  end
+
+  def test_show<%= suffix %>_without_id
+    get 'show<%= suffix %>'
+
+    assert_response :redirect
+    assert_redirected_to :action => 'list<%= suffix %>'
+    assert flash.has_key?(:notice)
   end
 end
