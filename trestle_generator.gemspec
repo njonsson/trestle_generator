@@ -9,7 +9,7 @@ spec = Gem::Specification.new do |s|
   s.description = 'Industrial-strength scaffolding for Ruby on Rails '        +
                   'application development. Don’t drive your train across a ' +
                   'gorge with nothing but a scaffold underneath it. Use a '   +
-                  'trestle instead! Learn more at '
+                  'trestle instead! Learn more at '                           +
                   'http://trestle.rubyforge.org/.'
   s.files = Dir.glob('*.rb')   +
             Dir.glob('README') +
