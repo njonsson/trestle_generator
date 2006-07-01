@@ -12,6 +12,7 @@ spec = Gem::Specification.new do |s|
                   'controllers that are safe from state-changing HTTP GET '    +
                   'requests and that have streamlined URLs.'
   s.files = Dir.glob('*.rb')   +
+            Dir.glob('CHANGELOG') +
             Dir.glob('README') +
             Dir.glob('USAGE')  +
             Dir.glob('templates/*')
