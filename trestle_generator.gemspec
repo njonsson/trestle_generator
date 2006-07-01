@@ -2,15 +2,15 @@ require 'rubygems'
 
 spec = Gem::Specification.new do |s|
   s.name = 'trestle_generator'
-  s.version = '1.1.6'
+  s.version = '1.1.7'
   s.summary = '[Rails] A drop-in replacement for the scaffold generator that ' +
               'produces production-ready controllers that are safe from '      +
               'state-changing HTTP GET requests and that have streamlined URLs.'
-  s.description = 'Industrial-strength scaffolding for Ruby on Rails '        +
-                  'application development. Don’t drive your train across a ' +
-                  'gorge with nothing but a scaffold underneath it. Use a '   +
-                  'trestle instead! Learn more at '                           +
-                  'http://trestle.rubyforge.org/.'
+  s.description = 'Industrial-strength scaffolding for Ruby on Rails '         +
+                  'application development. A drop-in replacement for the '    +
+                  'scaffold generator that produces production-ready '         +
+                  'controllers that are safe from state-changing HTTP GET '    +
+                  'requests and that have streamlined URLs.'
   s.files = Dir.glob('*.rb')   +
             Dir.glob('README') +
             Dir.glob('USAGE')  +
