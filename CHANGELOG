@@ -3,6 +3,8 @@
 
 *1.1.7* (July 1st, 2006)
 
+* Add CHANGELOG to gemspec. [njonsson]
+
 * Create CHANGELOG. [njonsson]
 
 * Remove extended characters from gemspec description because of a bug in the Gem server indexing code. [njonsson]
