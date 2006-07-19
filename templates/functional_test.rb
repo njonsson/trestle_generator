@@ -79,7 +79,7 @@ class <%= controller_class_name %>ControllerTest < Test::Unit::TestCase
     get 'list<%= suffix %>'
 
     assert_response :success
-    assert_template '<%= plural_name %>/list<%= suffix %>'
+    assert_template 'list<%= suffix %>'
 
     assert_not_nil assigns(:<%= plural_name %>)
   end
@@ -108,7 +108,7 @@ class <%= controller_class_name %>ControllerTest < Test::Unit::TestCase
     get 'show<%= suffix %>', :id => 1
 
     assert_response :success
-    assert_template '<%= plural_name %>/show<%= suffix %>'
+    assert_template 'show<%= suffix %>'
 
     assert_not_nil assigns(:<%= singular_name %>)
     assert assigns(:<%= singular_name %>).valid?
