@@ -1,6 +1,16 @@
 *SVN*
 
 
+*1.1.7.2* (August 2nd, 2006)
+
+* Fix bug in routes that substitutes /:controller/:id/show for /:controller/:id. [carl@youngbloods.org]
+
+
+*1.1.7.1* (July 19th, 2006)
+
+* Assert bare template names instead of forcing a plural-model-name prefix. [njonsson]
+
+
 *1.1.7* (July 1st, 2006)
 
 * Add CHANGELOG to gemspec. [njonsson]
