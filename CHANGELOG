@@ -1,6 +1,11 @@
 *SVN*
 
 
+*1.1.7.3* (August 17th, 2006)
+
+* Refactor redundant find expression. [vlad.zar@gmail.com]
+
+
 *1.1.7.2* (August 2nd, 2006)
 
 * Fix bug in routes that substitutes /:controller/:id/show for /:controller/:id. [carl@youngbloods.org]
