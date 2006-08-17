@@ -21,14 +21,12 @@ class <%= controller_class_name %>Controller < ApplicationController
   end
 
   def edit<%= suffix %>
+    @<%= singular_name %> = <%= model_name %>.find(params[:id])
     if request.post?
-      @<%= singular_name %> = <%= model_name %>.find(params[:id])
       if @<%= singular_name %>.update_attributes(params[:<%= singular_name %>])
         flash[:notice] = 'The <%= singular_name %> was successfully edited.'
         redirect_to :action => 'show<%= suffix %>', :id => @<%= singular_name %>
       end
-    else
-      @<%= singular_name %> = <%= model_name %>.find(params[:id])
     end
   end
 
