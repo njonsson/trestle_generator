@@ -11,10 +11,11 @@ spec = Gem::Specification.new do |s|
                   'scaffold generator that produces production-ready '         +
                   'controllers that are safe from state-changing HTTP GET '    +
                   'requests and that have streamlined URLs.'
-  s.files = Dir.glob('*.rb')   +
-            Dir.glob('CHANGELOG') +
-            Dir.glob('README') +
-            Dir.glob('USAGE')  +
+  s.files = Dir.glob('*.rb')                 +
+            Dir.glob('History.markdown')     +
+            Dir.glob('MIT-LICENSE.markdown') +
+            Dir.glob('README.markdown')      +
+            Dir.glob('USAGE')                +
             Dir.glob('templates/*')
   s.files.delete_if do |item|
     item.include?(".gemspec") || item.include?(".svn")
