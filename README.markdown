@@ -5,7 +5,7 @@ My reasons for starting this project are somewhat moot because of the REST suppo
 
 I now recommend that you use the Rails _scaffold_resource_ generator instead of my Trestle Generator. I think you’ll recognize in it the spirit and goals of the Trestle Generator, and it produces a standards-based API for your application, to boot.
 
-— /\/. _/.<br />
+— /\\/. _/.<br />
 December 2006
 
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -132,4 +132,4 @@ Do yourself and your users a favor by switching from scaffolds to trestles.
 
 Visit the RubyForge page (http://trestle.rubyforge.org) for this open-source project. Contact me at [nils@alumni.rice.edu](mailto:nils@alumni.rice.edu?subject=Trestle%20Generator).
 
-— /\/. _/.
+— /\\/. _/.
